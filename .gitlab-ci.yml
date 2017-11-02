@@ -1,0 +1,41 @@
+variables:
+    APPNAME: HtPlcFramework
+    REPONAME: HtPlcFramework
+    MSBUILDPATH: C:\Windows\Microsoft.NET\Framework64\v4.0.30319
+    NUGET_PATH: \\VM-SRV-APP03\SoftwareLibrary\NuGet\HtPlcFramework
+    
+before_script:
+#  - 'call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\vsvars32.bat"'
+#  - SET HOUR=%time:~0,2%
+#  - SET dtStamp9=%date:~-4%%date:~3,2%%date:~0,2%-0%time:~1,1%%time:~3,2%%time:~6,2% 
+#  - SET dtStamp24=%date:~-4%%date:~3,2%%date:~0,2%-%time:~0,2%%time:~3,2%%time:~6,2%
+#  - if "%HOUR:~0,1%" == " " (SET dtStamp=%dtStamp9%) else (SET dtStamp=%dtStamp24%)
+  - nuget restore %APPNAME%
+
+stages:
+    - build
+    - deploy
+
+jobBuildAssembly:
+    stage: build
+    script:
+        - MSBuild.exe /maxcpucount /nologo /p:Configuration=Release /p:DocumentationFile=%APPNAME%.xml "%APPNAME%/%APPNAME%.sln"
+    artifacts:
+        paths:
+            - '%APPNAME%\%APPNAME%\bin\Release'
+    tags:
+        - msbuild
+
+jobCreateNugetPackage:
+    stage: deploy
+    only:
+        - tags
+    tags:
+        - nuget
+    script:
+        # create output directory
+        - mkdir nuget
+        # create nuget package
+        - nuget pack -Prop Configuration=Release -OutputDirectory nuget %REPONAME%\%APPNAME%\%APPNAME%.csproj
+        # deploy package to local repo
+        - xcopy /s /y /i nuget %NUGET_PATH%
