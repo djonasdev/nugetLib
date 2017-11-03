@@ -1,20 +1,12 @@
 variables:
-    APPNAME: HtPlcFramework
-    REPONAME: HtPlcFramework
-    MSBUILDPATH: C:\Windows\Microsoft.NET\Framework64\v4.0.30319
-    NUGET_PATH: \\VM-SRV-APP03\SoftwareLibrary\NuGet\HtPlcFramework
+    APPNAME: nugetLib
     
 before_script:
-#  - 'call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\vsvars32.bat"'
-#  - SET HOUR=%time:~0,2%
-#  - SET dtStamp9=%date:~-4%%date:~3,2%%date:~0,2%-0%time:~1,1%%time:~3,2%%time:~6,2% 
-#  - SET dtStamp24=%date:~-4%%date:~3,2%%date:~0,2%-%time:~0,2%%time:~3,2%%time:~6,2%
-#  - if "%HOUR:~0,1%" == " " (SET dtStamp=%dtStamp9%) else (SET dtStamp=%dtStamp24%)
   - nuget restore %APPNAME%
 
 stages:
     - build
-    - deploy
+    - installer
 
 jobBuildAssembly:
     stage: build
@@ -26,16 +18,16 @@ jobBuildAssembly:
     tags:
         - msbuild
 
-jobCreateNugetPackage:
-    stage: deploy
-    only:
-        - tags
+jobCreateWinInstaller:
+    stage: installer
     tags:
-        - nuget
+        - msbuild
+        - wix
     script:
-        # create output directory
-        - mkdir nuget
-        # create nuget package
-        - nuget pack -Prop Configuration=Release -OutputDirectory nuget %REPONAME%\%APPNAME%\%APPNAME%.csproj
-        # deploy package to local repo
-        - xcopy /s /y /i nuget %NUGET_PATH%
+        - MSBuild.exe /maxcpucount /nologo /p:Configuration=Installer /p:DocumentationFile=%APPNAME%.xml "%APPNAME%/%APPNAME%.sln"
+        - xcopy /s /y /i %APPNAME%\%APPNAME%Setup\bin\Release .\
+    artifacts:
+        paths:
+            - .\*.msi
+
+
