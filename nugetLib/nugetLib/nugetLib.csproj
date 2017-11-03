@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FF96DF30-18B5-41B9-8A9F-2C7DC4549EF5}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>nugetLib</RootNamespace>
+    <RootNamespace>NuGetLib</RootNamespace>
     <AssemblyName>NuGetLib</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
