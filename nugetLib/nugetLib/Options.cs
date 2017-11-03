@@ -22,7 +22,7 @@ namespace nugetLib
 
     internal class AddSubOption
     {
-        [Option('t', "target", Required = true, HelpText = "The path to the '*.nupkg' file")]
+        [Option('t', "target", Required = true, HelpText = "The path to the '*.nupkg' file. If you supply a folder, the newest '*.nupkg' file is automatically taken.")]
         public string TargetFile { get; set; }
 
         [Option('f', "file", Required = true, HelpText = "The path to the file or folder you wan't to add")]

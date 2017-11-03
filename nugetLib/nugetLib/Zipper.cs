@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace nugetLib
         /// <param name="pathItem"></param>
         public static void AddItem(string pathZipFile, string pathItem)
         {
-            Program.WriteLine($"Opening zip - archive '{pathZipFile}'..");
+            Program.WriteLine($"Opening archive '{pathZipFile}'..");
             using (FileStream fileStream = new FileStream(pathZipFile, FileMode.Open))
             {
                 using (ZipArchive archive = new ZipArchive(fileStream, ZipArchiveMode.Update))
