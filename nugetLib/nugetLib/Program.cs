@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace nugetLib
@@ -48,7 +50,7 @@ namespace nugetLib
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine($"Unhandled Exception thrown! {ex}");
+                Console.Error.WriteLine($"Error: {ex.Message}");
                 Environment.Exit(CommandLine.Parser.DefaultExitCodeFail);
             }
         }
@@ -65,7 +67,25 @@ namespace nugetLib
         private static void _AddSubOption(AddSubOption addSubOption)
         {
             WriteLine("Operation Add File/Folder started");
-            Zipper.AddItem(addSubOption.TargetFile, addSubOption.File);
+
+            string zipPath = addSubOption.TargetFile;
+            if (Directory.Exists(addSubOption.TargetFile))
+            {
+                WriteLine("A folder is supplied as target. Looking for the newest NuGet package..");
+                DirectoryInfo directoryInfo = new DirectoryInfo(addSubOption.TargetFile);
+                FileInfo fileInfo = directoryInfo.GetFiles().Where(f => f.Name.EndsWith(".nupkg")).OrderBy(f => f.CreationTime).FirstOrDefault();
+                if (fileInfo == null)
+                {
+                    throw new FileNotFoundException("No file ending with *.nupkg found in directory!");
+                }
+                else
+                {
+                    WriteLine($"NuGet package found: {fileInfo.Name}");
+                    zipPath = fileInfo.FullName;
+                }                
+            }
+            
+            Zipper.AddItem(zipPath, addSubOption.File);
             WriteLine("Operation Add File/Folder successfully finished!");
         }
     }
