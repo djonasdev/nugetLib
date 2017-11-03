@@ -12,10 +12,9 @@ jobBuildAssembly:
     stage: build
     script:
         - MSBuild.exe /maxcpucount /nologo /p:Configuration=Release /p:DocumentationFile=%APPNAME%.xml "%APPNAME%/%APPNAME%.sln"
-        - xcopy /s /y /i '%APPNAME%\%APPNAME%\bin\Release' .\
     artifacts:
         paths:
-        - .\*
+            - '%APPNAME%\%APPNAME%\bin\Release'
     tags:
         - msbuild
 
