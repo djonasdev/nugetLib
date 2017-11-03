@@ -1,5 +1,6 @@
 variables:
     APPNAME: nugetLib
+    NUGET_PATH: \\VM-SRV-APP03\SoftwareLibrary\Software\NuGetLib
     
 before_script:
   - nuget restore %APPNAME%
@@ -7,6 +8,7 @@ before_script:
 stages:
     - build
     - installer
+    - deploy
 
 jobBuildAssembly:
     stage: build
@@ -25,9 +27,17 @@ jobCreateWinInstaller:
         - wix
     script:
         - MSBuild.exe /maxcpucount /nologo /p:DocumentationFile=%APPNAME%.xml "%APPNAME%/%APPNAME%.sln"
-        - xcopy /s /y /i %APPNAME%\%APPNAME%Installer\bin\Release .\
+        - xcopy /s /y /i %APPNAME%\%APPNAME%Installer\bin\Release\*.msi .\
     artifacts:
         paths:
             - .\*.msi
 
+jobDeployMsi:
+    stage: deploy
+    only:
+        - tags
+    tags:
+        - msbuild
+    script:
+        - xcopy /s /y /i .\*.msi %NUGET_PATH%
 
