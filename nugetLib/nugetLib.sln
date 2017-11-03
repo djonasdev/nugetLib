@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nugetLib", "nugetLib.csproj", "{FF96DF30-18B5-41B9-8A9F-2C7DC4549EF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nugetLib", "nugetLib\nugetLib.csproj", "{FF96DF30-18B5-41B9-8A9F-2C7DC4549EF5}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "nugetLibInstaller", "..\nugetLibInstaller\nugetLibInstaller.wixproj", "{6F84A2A8-FE67-40DF-9BCD-639D0166C907}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "nugetLibInstaller", "nugetLibInstaller\nugetLibInstaller.wixproj", "{6F84A2A8-FE67-40DF-9BCD-639D0166C907}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
