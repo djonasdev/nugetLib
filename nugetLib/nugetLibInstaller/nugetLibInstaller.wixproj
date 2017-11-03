@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>6f84a2a8-fe67-40df-9bcd-639d0166c907</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>nugetLibInstaller</OutputName>
+    <OutputName>NuGetLibInstaller</OutputName>
     <OutputType>Package</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -22,7 +22,7 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\nugetLib\nugetLib.csproj">
+    <ProjectReference Include="..\NuGetLib\NuGetLib.csproj">
       <Name>nugetLib</Name>
       <Project>{ff96df30-18b5-41b9-8a9f-2c7dc4549ef5}</Project>
       <Private>True</Private>
