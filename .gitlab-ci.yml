@@ -26,7 +26,7 @@ jobCreateWinInstaller:
         - msbuild
         - wix
     script:
-        - MSBuild.exe /maxcpucount /nologo /p:Configuration=Release "%APPNAME%/%APPNAME%.sln"
+        - MSBuild.exe /maxcpucount /nologo /p:Configuration=Installer "%APPNAME%/%APPNAME%.sln"
         - xcopy /s /y /i %APPNAME%\%APPNAME%Installer\bin\Release\*.msi .\
     artifacts:
         paths:
