@@ -41,7 +41,7 @@ namespace nugetLib
                         foreach (FileInfo file in directoryInfo.AllFilesAndFolders().Where(o => o is FileInfo).Cast<FileInfo>())
                         {
                             Program.WriteLine($"Adding file '{file.FullName}'");
-                            string relPath = file.FullName.Substring(directoryInfo.FullName.Length + 1);
+                            string relPath = file.FullName.Substring(directoryInfo.FullName.Length -directoryInfo.Name.Length);
                             archive.CreateEntryFromFile(file.FullName, relPath);
                         }
                     }
