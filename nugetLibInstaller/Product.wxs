@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define NugetLib_TargetDir=$(var.nugetLib.TargetDir)?>
+  <Product Id="*"
+           Name="NuGetLib"
+           Language="1033"
+           Version="!(bind.FileVersion.nugetLib.exe)"
+           Manufacturer="Dominic Jonas"
+           UpgradeCode="{D0B6F99A-4CE2-45BB-BD4D-D7A88467D01D}">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Description="GSVG Installer" />
+
+    <MajorUpgrade AllowSameVersionUpgrades="yes" IgnoreRemoveFailure="no" DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+    <Media Id="1" Cabinet="Sample.cab" EmbedCab="yes" />
+
+    <Property Id="ARPHELPLINK" Value="http://www.dominic-jonas.de" />
+    <Property Id="ARPCONTACT" Value="mailto:info@dominic-jonas.de" />
+    <Property Id="ARPCOMMENTS" Value="NuGetLib gives you additional features to handle NuGet Packages." />
+    <Property Id="ARPPRODUCTICON" Value="appIcon.icon" />
+    <Icon Id="appIcon.icon" SourceFile="dolphin.ico" />
+    
+    <Feature Id="NuGetLibFeature" Title="Nuget Library" Level="1">
+      <ComponentGroupRef Id="NugetLibrary" />
+    </Feature>
+
+    <Property Id="INSTALLFOLDER">
+      <RegistrySearch Id="RememberInstallFolder" Root="HKLM" Key="SOFTWARE\[Manufacturer]\[ProductName]" Name="InstallFolder" Type="raw" />
+    </Property>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="ManufacturerFolder" Name="DJonas">
+          <Directory Id="INSTALLFOLDER" Name="NuGetLib" />
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="NugetLibrary" Directory="INSTALLFOLDER">
+      <Component Id="nugetLib.exe" Guid="{98201B7E-F910-45BE-8287-13AA38414D25}">
+        <File Id="nugetLib.exe" Name="nugetLib.exe" Source="$(var.NugetLib_TargetDir)nugetLib.exe" />
+        <RegistryValue Id="RegInstallFolder" Root="HKLM" Key="SOFTWARE\[Manufacturer]\[ProductName]" Type="string" Name="InstallFolder" Value="[INSTALLFOLDER]" KeyPath="yes" />
+        <Environment Id="UpdatePath" Name="PATH" Action="set" Permanent="no" System="yes" Part="last" Value="[INSTALLFOLDER]" />
+      </Component>
+      <Component Id="CommandLine.dll" Guid="{9CB4E0CD-754A-4B3D-9235-A46F5F7EEC4B}">
+        <File Id="CommandLine.dll" Name="CommandLine.dll" Source="$(var.NugetLib_TargetDir)CommandLine.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
