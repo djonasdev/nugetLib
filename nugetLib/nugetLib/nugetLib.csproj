@@ -73,7 +73,7 @@
     <PreBuildEvent>gitsemver assemblyinfo -t $(MSBuildProjectDirectory)\Properties\AssemblyInfo.cs</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>copy/b/y "$(TargetDir)*.dll" "$(SolutionDir)Library"
+    <PostBuildEvent>copy/b/y "$(TargetDir)*.dll" "$(SolutionDir)Library\"
 xcopy "$(TargetDir)7zip\*" "$(SolutionDir)Library\7zip" /h/i/c/k/e/r/y</PostBuildEvent>
   </PropertyGroup>
 </Project>
