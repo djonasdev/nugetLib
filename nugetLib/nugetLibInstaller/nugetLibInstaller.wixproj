@@ -19,6 +19,7 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Library.wxs" />
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +52,9 @@
 FOR /F "tokens=%2a" %25%25a in (%27gitsemver semver%27) do SET OUTPUT=%25%25a
 del /f /q "$(TargetDir)$(SolutionName)_v%25OUTPUT%25.msi"
 rename !(TargetPath) $(SolutionName)_v%25OUTPUT%25.msi</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(SolutionDir)Library" -cg LibraryFiles -gg -scom -sreg -sfrag -srd -dr INSTALLFOLDER -var wix.PackageSource="$(SolutionDir)Library" -out "$(ProjectDir)Library.wxs"</PreBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
