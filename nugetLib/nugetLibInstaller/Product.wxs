@@ -21,6 +21,7 @@
     
     <Feature Id="NuGetLibFeature" Title="Nuget Library" Level="1">
       <ComponentGroupRef Id="NugetLibrary" />
+      <ComponentGroupRef Id="LibraryFiles" />
     </Feature>
 
     <Property Id="INSTALLFOLDER">
@@ -46,9 +47,6 @@
         <File Id="nugetLib.exe" Name="nugetLib.exe" Source="$(var.NugetLib_TargetDir)nugetLib.exe" />
         <RegistryValue Id="RegInstallFolder" Root="HKLM" Key="SOFTWARE\[Manufacturer]\[ProductName]" Type="string" Name="InstallFolder" Value="[INSTALLFOLDER]" KeyPath="yes" />
         <Environment Id="UpdatePath" Name="PATH" Action="set" Permanent="no" System="yes" Part="last" Value="[INSTALLFOLDER]" />
-      </Component>
-      <Component Id="CommandLine.dll" Guid="{9CB4E0CD-754A-4B3D-9235-A46F5F7EEC4B}">
-        <File Id="CommandLine.dll" Name="CommandLine.dll" Source="$(var.NugetLib_TargetDir)CommandLine.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>
