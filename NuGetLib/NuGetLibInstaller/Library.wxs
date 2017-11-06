@@ -2,15 +2,12 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
         <DirectoryRef Id="INSTALLFOLDER">
-            <Component Id="cmpCC5600A0E0013FC2479752FF2E317D0E" Guid="{8D3EEE42-A3C9-493E-A2DE-2130A66CA4E5}">
-                <File Id="filA37EA31C1F18E8079A0153A07EC2C1F2" KeyPath="yes" Source="!(wix.PackageSource=D:\Repositories\gitlab.haprotec\misc\NuGetLib\NuGetLib\Library)\CommandLine.dll" />
-            </Component>
             <Directory Id="dir4FD437D5515547CC56A93A97EC62EBD5" Name="7zip">
-                <Component Id="cmpC70E555036EB7E92A7004BD4AB7FF1FC" Guid="{FC47BC7D-7DDB-4D96-917A-5D40EA4D7FD7}">
+                <Component Id="cmpC70E555036EB7E92A7004BD4AB7FF1FC" Guid="{E9D66295-8C7F-4DD4-8896-67B74EB729E9}">
                     <File Id="filE7A19110236F862B9C83A452BAD25232" KeyPath="yes" Source="!(wix.PackageSource=D:\Repositories\gitlab.haprotec\misc\NuGetLib\NuGetLib\Library)\7zip\7za.exe" />
                 </Component>
                 <Directory Id="dirA72DE357AF3A33AA3D7A666886D3EEA0" Name="x64">
-                    <Component Id="cmpB2C16228080A94B00EF711A5720E2555" Guid="{49468A83-9E1F-42CA-BEE3-A1A15E11181D}">
+                    <Component Id="cmpB2C16228080A94B00EF711A5720E2555" Guid="{5EEB34CF-A0C6-42AD-A054-E459106ED481}">
                         <File Id="fil496658ED75E41268558CD1629F365B76" KeyPath="yes" Source="!(wix.PackageSource=D:\Repositories\gitlab.haprotec\misc\NuGetLib\NuGetLib\Library)\7zip\x64\7za.exe" />
                     </Component>
                 </Directory>
@@ -19,7 +16,6 @@
     </Fragment>
     <Fragment>
         <ComponentGroup Id="LibraryFiles">
-            <ComponentRef Id="cmpCC5600A0E0013FC2479752FF2E317D0E" />
             <ComponentRef Id="cmpC70E555036EB7E92A7004BD4AB7FF1FC" />
             <ComponentRef Id="cmpB2C16228080A94B00EF711A5720E2555" />
         </ComponentGroup>
