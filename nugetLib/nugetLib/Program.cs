@@ -84,7 +84,7 @@ namespace nugetLib
             {
                 WriteLine("A folder is supplied as target. Looking for the newest NuGet package..");
                 DirectoryInfo directoryInfo = new DirectoryInfo(addSubOption.TargetFile);
-                FileInfo fileInfo = directoryInfo.GetFiles().Where(f => f.Name.EndsWith(".nupkg")).OrderBy(f => f.CreationTime).FirstOrDefault();
+                FileInfo fileInfo = directoryInfo.GetFiles().Where(f => f.Name.EndsWith(".nupkg")).OrderByDescending(f => f.CreationTime).FirstOrDefault();
                 if (fileInfo == null)
                 {
                     throw new FileNotFoundException("No file ending with *.nupkg found in directory!");
