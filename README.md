@@ -49,3 +49,13 @@ NuGetLib is using `7zip` to manipulate the packages. The `-f` parameter is passe
 > `nugetlib add -t example.nupkg dir2\dir3\`
 > 
 > The filenames in archive example.nupkg will contain dir2\dir3\ prefix, but they will not contain c:\dir1\ prefix.
+
+example usage: https://stackoverflow.com/questions/47075041/vs2017-set-build-action-to-content-in-a-nuget-package
+
+### nugetlib frameworkassemblies
+
+```shell
+nugetlib frameworkassemblies [-c <path to the project file>] [-n <path to the nuspec file>] [-p <path to the (nuget) packages file>] [-r <replace existing framework assemblies in the nuspec file>]
+```
+
+Modify/add the framework assemblies of the given project into the nuspec file. If you don't supply any parameter, then the executing directory is used/scanned for a *.csproj and  *.nuspec file.
