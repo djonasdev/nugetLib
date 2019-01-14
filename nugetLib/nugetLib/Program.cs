@@ -16,7 +16,7 @@ namespace nugetLib
             string verb = null;
             object subOptions = null;
 
-            //args = new[] {"frameworkassemblies", "-n D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework.nuspec", "-c D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework.csproj", "-p D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\packages.config" };
+            //args = new[] { "frameworkassemblies", "-n D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework.nuspec", "-c D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework.csproj", "-p D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\packages.config" , "-r"};
 
             Options options = new Options();
             if (!CommandLine.Parser.Default.ParseArguments(args, options,
@@ -184,6 +184,13 @@ namespace nugetLib
             var frameworkAssemblies = metadata.Descendants().FirstOrDefault(d => d.Name == "frameworkAssemblies");
             if (frameworkAssemblies == null)
             {
+                frameworkAssemblies = new XElement("frameworkAssemblies");
+                metadata.Add(frameworkAssemblies);
+            }
+            else if(frameworkAssembliesSubOption.Replace)
+            {
+                WriteLine("Delete all existing references in nuspec");
+                frameworkAssemblies.Remove();
                 frameworkAssemblies = new XElement("frameworkAssemblies");
                 metadata.Add(frameworkAssemblies);
             }
