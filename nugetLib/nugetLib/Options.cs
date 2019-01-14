@@ -11,6 +11,9 @@ namespace nugetLib
         [VerbOption("add", HelpText = "Add a file or folder to a NugetPackage")]
         public AddSubOption AddVerb { get; set; }
 
+        [VerbOption("frameworkassemblies", HelpText = "Modify the Framework Assemblies of the given nuspec file")]
+        public FrameworkAssembliesSubOption FrameworkAssembliesVerb { get; set; }
+
         [HelpVerbOption]
         public string GetUsage(string verb)
         {
@@ -27,5 +30,14 @@ namespace nugetLib
 
         [Option('f', "file", Required = true, HelpText = "The path to the file or folder you wan't to add")]
         public string File { get; set; }
+    }
+
+    internal class FrameworkAssembliesSubOption
+    {
+        [Option('n', "nuspecFile", Required = false, HelpText = "The path to the '*.nuspec' file. If not set, then the first found file is used.")]
+        public string TargetNuspec { get; set; }
+
+        [Option('p', "projectFile", Required = false, HelpText = "The path to the '*.csproj' file.  If not set, then the first found file is used.")]
+        public string ProjectFile { get; set; }
     }
 }
