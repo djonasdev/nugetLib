@@ -17,6 +17,7 @@ namespace nugetLib
             object subOptions = null;
 
             //args = new[] { "frameworkassemblies", "-n D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework.nuspec", "-c D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework.csproj", "-p D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\packages.config" , "-r"};
+            args = new[] { "frameworkassemblies"};
 
             Options options = new Options();
             if (!CommandLine.Parser.Default.ParseArguments(args, options,
@@ -109,9 +110,9 @@ namespace nugetLib
 
             if (string.IsNullOrEmpty(frameworkAssembliesSubOption.ProjectFile))
             {
-                WriteLine("looking for project file..");
+                WriteLine($"looking for project file in '{Environment.CurrentDirectory}'..");
 
-                projectFile = new FileInfo(Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory).FirstOrDefault(f => f.ToLower().EndsWith(".csproj")));
+                projectFile = new FileInfo(Directory.GetFiles(Environment.CurrentDirectory).FirstOrDefault(f => f.ToLower().EndsWith(".csproj")));
                 WriteLine($"found.. {projectFile.FullName}");
             }
             else
@@ -122,9 +123,9 @@ namespace nugetLib
 
             if (string.IsNullOrEmpty(frameworkAssembliesSubOption.TargetNuspec))
             {
-                WriteLine("looking for nuspec file..");
+                WriteLine($"looking for nuspec file in '{Environment.CurrentDirectory}'..");
 
-                nuspecFile = new FileInfo(Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory).FirstOrDefault(f => f.ToLower().EndsWith(".nuspec")));
+                nuspecFile = new FileInfo(Directory.GetFiles(Environment.CurrentDirectory).FirstOrDefault(f => f.ToLower().EndsWith(".nuspec")));
                 WriteLine($"found.. {nuspecFile.FullName}");
             }
             else
