@@ -1,6 +1,7 @@
 variables:
     APPNAME: nugetLib
     NUGET_PATH: \\VM-SRV-APP03\SoftwareLibrary\Software\NuGetLib
+    GITSEMVER_PRE_RELEASE: '0.5.1'
     
 before_script:
   - nuget restore %APPNAME%
