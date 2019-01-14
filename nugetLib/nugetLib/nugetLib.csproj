@@ -54,6 +54,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemInformation.cs" />
+    <Compile Include="XLinqExtension.cs" />
     <Compile Include="Zipper.cs" />
   </ItemGroup>
   <ItemGroup>

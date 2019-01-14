@@ -34,10 +34,16 @@ namespace nugetLib
 
     internal class FrameworkAssembliesSubOption
     {
-        [Option('n', "nuspecFile", Required = false, HelpText = "The path to the '*.nuspec' file. If not set, then the first found file is used.")]
+        [Option('n', "nuspec", Required = false, HelpText = "The path to the '*.nuspec' file. If not set, then the first found file is used.")]
         public string TargetNuspec { get; set; }
 
-        [Option('p', "projectFile", Required = false, HelpText = "The path to the '*.csproj' file.  If not set, then the first found file is used.")]
+        [Option('c', "csproject", Required = false, HelpText = "The path to the '*.csproj' file.  If not set, then the first found file is used.")]
         public string ProjectFile { get; set; }
+
+        [Option('p', "packages", Required = false, HelpText = "The path to the 'packages.config' file.  If set, we are able to filter nuget packages out of the csproj file.")]
+        public string PackagesFile { get; set; }
+
+        [Option('r', "replace", Required = false, HelpText = "Replace all framework assemblies depencies, otherwise they were added.")]
+        public bool Replace { get; set; }
     }
 }

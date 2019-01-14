@@ -245,3 +245,4 @@ ModelManifest.xml
 .fake/
 /HtPlcFramework/Library
 /HtPlcFramework/TestGui/Images/Message
+/NuGetLib/Library
