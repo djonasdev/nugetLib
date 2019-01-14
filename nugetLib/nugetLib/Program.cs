@@ -17,7 +17,7 @@ namespace nugetLib
             object subOptions = null;
 
             //args = new[] { "frameworkassemblies", "-n D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework.nuspec", "-c D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework.csproj", "-p D:\\Repositories\\gitlab.haprotec\\dotNet\\HtPlcFramework\\HtPlcFramework\\HtPlcFramework\\packages.config" , "-r"};
-            args = new[] { "frameworkassemblies"};
+            //args = new[] { "frameworkassemblies"};
 
             Options options = new Options();
             if (!CommandLine.Parser.Default.ParseArguments(args, options,
@@ -169,12 +169,9 @@ namespace nugetLib
             
             foreach (XElement xElement in itemGroups.ElementsAnyNamespace("Reference"))
             {
-                if (!xElement.HasElements || !xElement.ElementsAnyNamespace("HintPath").Any())
-                {
-                    WriteLine($"Reference found: {xElement}");
-                    var value = xElement.Attribute("Include").Value.Split(',');
-                    references.Add(value[0]);
-                }
+                WriteLine($"Reference found: {xElement}");
+                var value = xElement.Attribute("Include").Value.Split(',');
+                references.Add(value[0]);
             }
 
             // sort references before adding
@@ -203,6 +200,9 @@ namespace nugetLib
                     WriteLine($"Reference '{reference}' already in nuspec file. Skip it..");
                     continue;
                 }
+                if(nugetElements.Contains(reference))
+                    continue;
+                WriteLine($"Add reference '{reference}' into nuspec file");
                 frameworkAssemblies.Add(new XElement("frameworkAssembly", new XAttribute("assemblyName", reference)));
             }
 
